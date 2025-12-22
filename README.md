@@ -21,8 +21,7 @@ Workers consume jobs from a queue, run Whisper, and persist transcription artifa
 
 
 ## High-Level Architecture
-
-![Architecture Diagram](docs/diagrams/architecture.png)
+<img width="777" height="337" alt="Cloud Architecture Diagram drawio (3)" src="https://github.com/user-attachments/assets/4035e1a6-fb4e-4934-859b-8424b4a266a1" />
 
 **Components**
 - API Gateway — public HTTP entry point
@@ -36,9 +35,10 @@ Workers consume jobs from a queue, run Whisper, and persist transcription artifa
 
 
 
-## Processing Flow
+## Transcription Flow
 
-![Flowchart](docs/diagrams/flowchart.png)
+<img width="632" height="688" alt="Transcription Flow drawio" src="https://github.com/user-attachments/assets/cb30abef-9022-4e29-b115-eb1547c83546" />
+
 
 1. Client submits a transcription job
 2. API creates a job record and returns a presigned upload URL
@@ -92,4 +92,5 @@ DynamoDB is used for job state due to predictable access patterns and low-latenc
 
 ---
 
-## Repository Structure
+## Upcoming Features
+- Websocket connection to workers for realtime communication
