@@ -53,7 +53,7 @@ Workers consume jobs from a queue, run Whisper, and persist transcription artifa
 
 ## Entity Relationship Diagram
 
-![ERD](docs/diagrams/erd.png)
+<img width="768" height="732" alt="ERD drawio" src="https://github.com/user-attachments/assets/76779240-b4f1-4330-9b75-c133f74e5174" />
 
 **Primary Entities**
 - Job
