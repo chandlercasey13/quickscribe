@@ -8,15 +8,12 @@ public class AuthController {
 
     @GetMapping("/auth/login")
     public String Login(){
-        return "YOOOO";
+        return "Login";
     }
 
     @GetMapping("/auth/signup")
     public String SignUp(){
-//        check DB for username
-//        if user exists: return "Username already taken"
-//        else: createaccount
-        return "SIGNUP";
+        return "Signup";
     }
 
 }
