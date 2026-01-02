@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class QuickScribeApplication {
@@ -17,7 +18,10 @@ public class QuickScribeApplication {
     @Bean
     public CommandLineRunner seedDatabase(UserRepository userRepository) {
         return (args) -> {
-            userRepository.save(new User("chandlercasey13@gmail.com","StrongPass", "Chandler" ));
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+            String hashedPassword = encoder.encode("Pass");
+            userRepository.save(new User("chandlercasey13@gmail.com", hashedPassword, "Chandler" ));
         };
     }
 }
