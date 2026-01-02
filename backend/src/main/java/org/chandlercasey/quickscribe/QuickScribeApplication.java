@@ -15,13 +15,4 @@ public class QuickScribeApplication {
         SpringApplication.run(QuickScribeApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner seedDatabase(UserRepository userRepository) {
-        return (args) -> {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-            String hashedPassword = encoder.encode("Pass");
-            userRepository.save(new User("chandlercasey13@gmail.com", hashedPassword, "Chandler" ));
-        };
-    }
 }
