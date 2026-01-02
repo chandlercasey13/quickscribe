@@ -9,9 +9,12 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,32 +25,13 @@ import java.util.Optional;
 public class UserController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final UserDetailsService userDetailsService;
 
 
 
-    @PostMapping("/auth/login")
-    public ResponseEntity Login(@Valid @RequestBody LoginRequest loginRequest){
-        // currently this checks if user is there, and will return unauthorized if there is no user or the wrong password was used
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @GetMapping("/auth/login")
+    public ResponseEntity<String> Login(){
 
-            Optional<User> userOpt = userRepository.findByEmail(loginRequest.email());
-
-            if (userOpt.isEmpty()) {
-                return ResponseEntity
-                        .status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("message", "Email does not Exist"));
-            }
-            User user = userOpt.get();
-
-            if (!encoder.matches(loginRequest.password(), user.getPassword())) {
-                return ResponseEntity
-                        .status(HttpStatus.UNAUTHORIZED)
-                        .body(Map.of("message", "Wrong Password"));
-            }
-
-            return ResponseEntity.ok().body(Map.of("Message","Success"));
-
+        return ResponseEntity.ok().body("String");
     }
 
     @PostMapping("/auth/signup")
@@ -65,6 +49,11 @@ public class UserController {
             return ResponseEntity.internalServerError().body("An error occured" + exception.getMessage());
         }
 
+    }
+    @GetMapping("/auth/user")
+    public ResponseEntity<String> User(Authentication authenticate){
+
+       return ResponseEntity.ok().body("User details");
 
     }
 
